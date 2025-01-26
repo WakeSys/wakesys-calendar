@@ -1,3 +1,4 @@
+
 <!-- fullcalendar related scripts -->
 <script
 	src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -27,7 +28,7 @@
 
 <script>
 /* GENERAL CONFIGURATION START */
-var park_subdomain = 'wasserski-wedau'; //put in your park subdomain
+var park_subdomain = 'charlestonaquapark'; //put in your park subdomain
 var park_first_day_of_week = 1; //first day of the week: 1 for monday, 0 for sunday
 var locale = 'de'; //de,fr,it,es,en-gb (this is for the native translations of the calendar)
 var park_min_opening_hours = '08:00:00'; // earliest time you open/have sessions/events
@@ -36,6 +37,7 @@ var park_time_am_or_pm = false; //if am/pm, change to hour12: true
 var textColor = '#000'; //text color in the events
 var calendarHeight = '800px' //auto: the calendar height will adopt the height of the content inside the calendar. Alternatively, you can do something like 800px, if the calendar should always be 800px, and the contents inside will then become scrowlable
 var hideEventsIfNotBookable = false; //hide events when they are not bookable in wakesys. alternatively do false, if you want to show them greyed out and with not available.
+var headerToolbarLeft = 'dayGridMonth,timeGridWeek,timeGridDay'; //what buttons to show in the header toolbar
 /* CONFIGURATION END */
 
 /* TRANSLATIONS CONFIGURATION START*/
@@ -54,9 +56,21 @@ var translations = {
 
 /* EVENTS CONFIGURATION START*/
 var colors = {
+    'Slot': '#88e645',   //Slot
+    '1': '#45e675',   //Ferienkurs
+    '2': '#45d3e6',   //Mini Ferienkurs
+    '3': '#4552e6',   //EarlyBoard
+    '89': '#45a5e6',   //Sunset Session
+    '166': '#9d45e6',   //Öffentlicher Betrieb
 };
 
 var eventsToShow = {
+    'Slot': true,   //Slot
+    '1': true,   //Ferienkurs
+    '2': true,   //Mini Ferienkurs
+    '3': true,   //EarlyBoard
+    '89': true,   //Sunset Session
+    '166': true,   //Öffentlicher Betrieb
 };
 /* EVENTS CONFIGURATION END*/
 

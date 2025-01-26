@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
         headerToolbar: {
             right: 'prev,next today', 
             center: 'title', 
-            left: 'dayGridMonth,timeGridWeek,timeGridDay' 
+            left: headerToolbarLeft
         },
         slotMinTime: park_min_opening_hours, 
         slotMaxTime: park_max_opening_hours, 
