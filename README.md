@@ -23,10 +23,11 @@ A customizable calendar integration for WakeSys that displays bookable sessions,
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
 <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales-all.global.min.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 <!-- WakeSys Calendar Files -->
-<script src="helpfunctions.js"></script>
-<script src="wakesyscalendar.js"></script>
-<link href="wakesyscalendar.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.0/helpfunctions.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.0/wakesyscalendar.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.0/wakesyscalendar.css" rel="stylesheet">
 ```
 
 2. Add the calendar container to your HTML:
@@ -39,20 +40,41 @@ A customizable calendar integration for WakeSys that displays bookable sessions,
 
 ## Event Colors and Visibility
 
-Configure event colors and visibility in the following arrays:
+The calendar supports automatic configuration of event colors and visibility settings. There are two ways to configure this:
+
+1. **Automatic Generation**: Leave the configuration arrays empty, and the system will generate default settings on first use:
+
+```javascript
+var colors = {
+};
+
+var eventsToShow = {
+};
+```
+
+On first load, this will trigger a popup showing suggested configurations that you can copy and customize.
+
+2. **Manual Configuration**: Directly specify colors and visibility for each event type:
 
 ```javascript
 var colors = {
     'Slot': '#88e645',   // Regular Opening Hours
-    // Add more event types and their colors here
+    'Event1': '#ff0000', // Custom Event Type 1
+    'Event2': '#00ff00'  // Custom Event Type 2
 };
 
 var eventsToShow = {
-    'Slot': true,   // Regular Opening Hours
-    // Configure which events to show/hide
+    'Slot': true,    // Show Regular Opening Hours
+    'Event1': true,  // Show Custom Event Type 1
+    'Event2': false  // Hide Custom Event Type 2
 };
 ```
 
+### Configuration Options:
+- `colors`: Maps event types to their display colors (using hex color codes)
+- `eventsToShow`: Controls visibility of each event type (true = show, false = hide)
+
+To add new event types that you've created in WakeSys, simply leave the arrays empty and let the system generate updated configurations, then customize the colors and visibility as needed.
 
 ## Features
 
