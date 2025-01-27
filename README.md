@@ -25,9 +25,9 @@ A customizable calendar integration for WakeSys that displays bookable sessions,
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <!-- WakeSys Calendar Files -->
-<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.0/helpfunctions.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.0/wakesyscalendar.js"></script>
-<link href="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.0/wakesyscalendar.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.1/helpfunctions.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.1/wakesyscalendar.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.1/wakesyscalendar.css" rel="stylesheet">
 ```
 
 2. Add the calendar container to your HTML:
