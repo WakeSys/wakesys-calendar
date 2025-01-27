@@ -38,6 +38,67 @@ A customizable calendar integration for WakeSys that displays bookable sessions,
 </div>
 ```
 
+## Required Configuration
+
+The following variables must be set in your HTML before the calendar scripts for proper functionality:
+
+```javascript
+/* General Configuration */
+var park_subdomain = 'your-subdomain';        // Your WakeSys park subdomain
+var park_first_day_of_week = 1;               // First day of week (1 = Monday, 0 = Sunday)
+var locale = 'de';                            // Calendar locale (de,fr,it,es,en-gb)
+var park_min_opening_hours = '08:00:00';      // Earliest opening time
+var park_max_opening_hours = '20:00:00';      // Latest closing time
+var park_time_am_or_pm = false;               // Time format (false = 24h, true = AM/PM)
+var textColor = '#000';                       // Event text color
+var calendarHeight = '800px';                 // Calendar height ('auto' or specific height)
+var hideEventsIfNotBookable = false;          // Hide or show non-bookable events
+var headerToolbarLeft = 'dayGridMonth,timeGridWeek,timeGridDay'; // Visible calendar views
+
+/* Required Translations */
+var translations = {
+    'public_opening_hours': 'Public Hours',    // Public riding hours text
+    'slot': 'Slot',                           // Slot text
+    'bookable': 'Available',                  // Available status text
+    'booked_out': 'Booked Out',              // Fully booked status text
+    'not_available': 'Not Available',         // Unavailable status text
+    'currency': '€',                          // Currency symbol
+    'full_booked': 'Fully Booked',           // Full booking status text
+    'slotPrice': 'from €20',                 // Default slot price text
+    'loading': 'Loading',                    // Loading status text
+};
+
+/* Event Configuration Arrays */
+var colors = {};                              // Event color mappings
+var eventsToShow = {};                        // Event visibility settings
+```
+
+Example implementation:
+
+```html
+<script>
+    /* GENERAL CONFIGURATION */
+    var park_subdomain = 'test-wasserski-wedau';
+    var park_first_day_of_week = 1;
+    // ... set all required variables ...
+
+    /* TRANSLATIONS */
+    var translations = {
+        'public_opening_hours': 'Öffentlicher Betrieb',
+        'slot': 'Slot',
+        // ... set all required translations ...
+    };
+
+    /* EVENT CONFIGURATION */
+    var colors = {};
+    var eventsToShow = {};
+</script>
+
+```
+
+> **Note**: All configuration variables must be set. Missing or incorrect configuration may cause the calendar to malfunction.
+
+
 ## Event Colors and Visibility
 
 The calendar supports automatic configuration of event colors and visibility settings. There are two ways to configure this:
@@ -117,63 +178,3 @@ You should have received a copy of the GNU General Public License along with thi
 ## Support
 
 For support or questions, please contact your WakeSys representative.
-
-## Required Configuration
-
-The following variables must be set in your HTML before the calendar scripts for proper functionality:
-
-```javascript
-/* General Configuration */
-var park_subdomain = 'your-subdomain';        // Your WakeSys park subdomain
-var park_first_day_of_week = 1;               // First day of week (1 = Monday, 0 = Sunday)
-var locale = 'de';                            // Calendar locale (de,fr,it,es,en-gb)
-var park_min_opening_hours = '08:00:00';      // Earliest opening time
-var park_max_opening_hours = '20:00:00';      // Latest closing time
-var park_time_am_or_pm = false;               // Time format (false = 24h, true = AM/PM)
-var textColor = '#000';                       // Event text color
-var calendarHeight = '800px';                 // Calendar height ('auto' or specific height)
-var hideEventsIfNotBookable = false;          // Hide or show non-bookable events
-var headerToolbarLeft = 'dayGridMonth,timeGridWeek,timeGridDay'; // Visible calendar views
-
-/* Required Translations */
-var translations = {
-    'public_opening_hours': 'Public Hours',    // Public riding hours text
-    'slot': 'Slot',                           // Slot text
-    'bookable': 'Available',                  // Available status text
-    'booked_out': 'Booked Out',              // Fully booked status text
-    'not_available': 'Not Available',         // Unavailable status text
-    'currency': '€',                          // Currency symbol
-    'full_booked': 'Fully Booked',           // Full booking status text
-    'slotPrice': 'from €20',                 // Default slot price text
-    'loading': 'Loading',                    // Loading status text
-};
-
-/* Event Configuration Arrays */
-var colors = {};                              // Event color mappings
-var eventsToShow = {};                        // Event visibility settings
-```
-
-Example implementation:
-
-```html
-<script>
-    /* GENERAL CONFIGURATION */
-    var park_subdomain = 'test-wasserski-wedau';
-    var park_first_day_of_week = 1;
-    // ... set all required variables ...
-
-    /* TRANSLATIONS */
-    var translations = {
-        'public_opening_hours': 'Öffentlicher Betrieb',
-        'slot': 'Slot',
-        // ... set all required translations ...
-    };
-
-    /* EVENT CONFIGURATION */
-    var colors = {};
-    var eventsToShow = {};
-</script>
-
-```
-
-> **Note**: All configuration variables must be set. Missing or incorrect configuration may cause the calendar to malfunction.
