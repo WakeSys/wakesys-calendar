@@ -1,0 +1,124 @@
+# WakeSys Calendar Integration
+
+## Project Overview
+
+This is a customizable calendar integration for WakeSys that displays bookable sessions, events, and opening hours using FullCalendar.js. The project provides a JavaScript widget that can be embedded into any website to show real-time availability and booking status for WakeSys-powered facilities.
+
+### Key Features
+- Display of public opening hours, bookable slots, and events
+- Real-time availability and booking status
+- Responsive design (mobile and desktop)
+- Multi-language support
+- Customizable color schemes for different event types
+- Loading overlay for better user experience
+- Automatic handling of time zones
+- Configurable booking cut-off times
+
+### Core Files
+- `wakesyscalendar.js` - Main calendar functionality and API integration
+- `wakesyscalendar.css` - Styling and responsive design
+- `helpfunctions.js` - Utility functions for API calls, color generation, and UI helpers
+- `index.html` - Demo/example implementation
+- `README.md` - Comprehensive documentation and usage instructions
+
+### Dependencies
+- jQuery 3.7.1
+- FullCalendar 6.1.10 
+- Moment.js 2.29.1
+- Google Fonts (Sarabun)
+
+## Current CDN Usage
+
+The project is currently distributed via CDN using jsDelivr with GitHub integration:
+
+```html
+<!-- WakeSys Calendar Files -->
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.1/helpfunctions.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.1/wakesyscalendar.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.1/wakesyscalendar.css" rel="stylesheet">
+```
+
+## Creating a New Version for CDN Distribution
+
+To make a new version available on cdn.jsdelivr.net, follow these steps:
+
+### 1. Prepare the Release
+
+1. **Update Version References**: Update any version references in documentation (README.md) if needed
+2. **Test Changes**: Ensure all functionality works correctly with the demo in `index.html`
+3. **Check File Integrity**: Verify that all three core files (`wakesyscalendar.js`, `wakesyscalendar.css`, `helpfunctions.js`) are ready for distribution
+
+### 2. Create a Git Tag
+
+jsDelivr uses Git tags to serve specific versions. Create a new semantic version tag:
+
+```bash
+# Commit any pending changes first
+git add .
+git commit -m "Prepare release v1.0.2"
+
+# Create and push the tag
+git tag v1.0.2
+git push origin v1.0.2
+
+# Or push all tags
+git push origin --tags
+```
+
+### 3. Verify CDN Availability
+
+After pushing the tag, the files will be automatically available on jsDelivr:
+
+- **helpfunctions.js**: `https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.2/helpfunctions.js`
+- **wakesyscalendar.js**: `https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.2/wakesyscalendar.js`  
+- **wakesyscalendar.css**: `https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.2/wakesyscalendar.css`
+
+### 4. Update Documentation
+
+Update the README.md file with the new version number in the installation instructions:
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.2/helpfunctions.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.2/wakesyscalendar.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.2/wakesyscalendar.css" rel="stylesheet">
+```
+
+### 5. Alternative CDN Options
+
+If you need faster cache invalidation or more control, consider:
+
+- **Latest version**: Use `@latest` instead of specific version (not recommended for production)
+- **Commit hash**: Use specific commit hash instead of tag for immediate availability
+- **Branch**: Use `@main` for development versions (not recommended for production)
+
+Example with commit hash:
+```html
+<script src="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@abc1234/wakesyscalendar.js"></script>
+```
+
+### 6. Version Naming Convention
+
+Follow semantic versioning (semver):
+- **Major** (1.0.0 → 2.0.0): Breaking changes
+- **Minor** (1.0.0 → 1.1.0): New features, backward compatible
+- **Patch** (1.0.0 → 1.0.1): Bug fixes, backward compatible
+
+## Development Workflow
+
+1. **Make Changes**: Edit the source files as needed
+2. **Test Locally**: Use `index.html` to test changes
+3. **Commit Changes**: Commit to the main branch
+4. **Create Tag**: Follow the versioning process above
+5. **Update Docs**: Update version references in README.md
+
+## Notes
+
+- jsDelivr has a global CDN with excellent performance and reliability
+- Files are cached for 7 days by default, new versions are available immediately
+- The CDN supports HTTP/2 and has automatic minification options
+- For production use, always pin to specific version tags rather than using `@latest`
+- Consider using SRI (Subresource Integrity) hashes for additional security in production
+
+## License
+
+GNU GPLv3 - All derivative works must be made available under the same license terms.

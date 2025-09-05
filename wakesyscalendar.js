@@ -358,59 +358,61 @@ document.addEventListener('DOMContentLoaded', function () {
         // Iterate over the response object and process each day's opening hours
         for (var date in data) {
             var dayData = data[date]; 
-            if (dayData.opening_times !== "closed") { // Check if not "closed"
-                // Split the opening hours into start and end times
-                var transportationName = dayData.transportation_name;
-                var [startTime, endTime] = dayData.opening_times.split(' - ');
+            if (eventsToShow['Slot'] !== false) {
+                if (dayData.opening_times !== "closed") { // Check if not "closed"
+                    // Split the opening hours into start and end times
+                    var transportationName = dayData.transportation_name;
+                    var [startTime, endTime] = dayData.opening_times.split(' - ');
 
-                var start = moment(date + 'T' + startTime, "YYYY-MM-DD HH:mm:ss").toDate();
-                var end = moment(date + 'T' + endTime, "YYYY-MM-DD HH:mm:ss").toDate();
+                    var start = moment(date + 'T' + startTime, "YYYY-MM-DD HH:mm:ss").toDate();
+                    var end = moment(date + 'T' + endTime, "YYYY-MM-DD HH:mm:ss").toDate();
 
-                var colorConfig = colors['Slot'];
-                if (debugging) console.log('colorConfig: ' + colorConfig);
-                
+                    var colorConfig = colors['Slot'];
+                    if (debugging) console.log('colorConfig: ' + colorConfig);
+                    
 
-                var backgroundColor = "#EEEEEE"; // Default background color
+                    var backgroundColor = "#EEEEEE"; // Default background color
 
-                // Check if the event can still be booked based on hours in advance
-                if (moment(end) <= currentTime) {
-                    backgroundColor = "#EEEEEE"; // Set background color to #EEEEEE
-                } else {
-                    if (typeof colorConfig !== 'undefined') {
-                        backgroundColor = colorConfig;
+                    // Check if the event can still be booked based on hours in advance
+                    if (moment(end) <= currentTime) {
+                        backgroundColor = "#EEEEEE"; // Set background color to #EEEEEE
+                    } else {
+                        if (typeof colorConfig !== 'undefined') {
+                            backgroundColor = colorConfig;
+                        }
+                        else backgroundColor = generateColor('Slot');
                     }
-                    else backgroundColor = generateColor('Slot');
+
+                    // Create the event object with the required properties
+                    var eventObj = {
+                        title: translations['public_opening_hours'],
+                        classNames: 'opening_hours',
+                        start: start,
+                        end: end,
+                        backgroundColor: backgroundColor, // Use the defined backgroundColor
+                        cableName: transportationName,
+                        description: '',
+                        textColor: textColor, // Use the defined textColor
+                        seats: null,
+                        price: translations['slotPrice'],
+                        hoursInAdvance: 0,
+                        isBookable: "yes",
+                        checkinTime: "30",
+                        bookedSeats: null,
+                        url: 'https://' + park_subdomain + '.wakesys.com/',
+                        allDay: false // Consider using false instead of 0 for clarity
+                    };
+                    // console.log('Adding openingTimes:', eventObj);
+
+                    // Remove URL if the event is not bookable or starts within hours in advance
+                    if (moment(end) <= currentTime) {
+                        delete eventObj.url;
+                    }
+
+                    events.push(eventObj);
+                } else {
+                    // console.log('Closed on:', date); // Log or handle closed days as needed
                 }
-
-                // Create the event object with the required properties
-                var eventObj = {
-                    title: translations['public_opening_hours'],
-                    classNames: 'opening_hours',
-                    start: start,
-                    end: end,
-                    backgroundColor: backgroundColor, // Use the defined backgroundColor
-                    cableName: transportationName,
-                    description: '',
-                    textColor: textColor, // Use the defined textColor
-                    seats: null,
-                    price: translations['slotPrice'],
-                    hoursInAdvance: 0,
-                    isBookable: "yes",
-                    checkinTime: "30",
-                    bookedSeats: null,
-                    url: 'https://' + park_subdomain + '.wakesys.com/',
-                    allDay: false // Consider using false instead of 0 for clarity
-                };
-                // console.log('Adding openingTimes:', eventObj);
-
-                // Remove URL if the event is not bookable or starts within hours in advance
-                if (moment(end) <= currentTime) {
-                    delete eventObj.url;
-                }
-
-                events.push(eventObj);
-            } else {
-                // console.log('Closed on:', date); // Log or handle closed days as needed
             }
         }
     }
