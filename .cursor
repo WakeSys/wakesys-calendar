@@ -1,4 +1,4 @@
-# WakeSys Calendar Integration
+ns# WakeSys Calendar Integration
 
 ## Project Overview
 
@@ -83,6 +83,14 @@ Update the README.md file with the new version number in the installation instru
 <link href="https://cdn.jsdelivr.net/gh/wakesys/wakesys-calendar@1.0.2/wakesyscalendar.css" rel="stylesheet">
 ```
 
+Then commit and push this documentation update:
+
+```bash
+git add README.md
+git commit -m "Update README.md to reference version 1.0.2 in CDN links"
+git push origin main
+```
+
 ### 5. Alternative CDN Options
 
 If you need faster cache invalidation or more control, consider:
@@ -109,7 +117,8 @@ Follow semantic versioning (semver):
 2. **Test Locally**: Use `index.html` to test changes
 3. **Commit Changes**: Commit to the main branch
 4. **Create Tag**: Follow the versioning process above
-5. **Update Docs**: Update version references in README.md
+5. **Update README**: Update version references in README.md and commit the changes
+6. **Push Everything**: Ensure both the tag and documentation updates are pushed
 
 ## Notes
 
