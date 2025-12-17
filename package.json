@@ -1,0 +1,32 @@
+{
+  "name": "wakesys-calendar",
+  "version": "2.0.0",
+  "description": "A customizable calendar integration for WakeSys that displays bookable sessions, events, and opening hours using FullCalendar.js",
+  "type": "module",
+  "main": "dist/wakesyscalendar.js",
+  "types": "dist/wakesyscalendar.d.ts",
+  "files": [
+    "dist",
+    "wakesyscalendar.css"
+  ],
+  "scripts": {
+    "build": "node esbuild.config.mjs && tsc --emitDeclarationOnly",
+    "dev": "node esbuild.config.mjs --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wakesys/wakesys-calendar"
+  },
+  "keywords": [
+    "calendar",
+    "wakesys",
+    "fullcalendar",
+    "booking"
+  ],
+  "author": "wakesys s.à.r.l.",
+  "license": "GPL-3.0",
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,70 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WakeSys Calendar Demo</title>
 
-<!-- fullcalendar related scripts -->
-<script
-	src="https://code.jquery.com/jquery-3.7.1.min.js"
-	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-	crossorigin="anonymous">     
-</script>
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
-<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales-all.global.min.js'></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;800&display=swap" rel="stylesheet">
 
+    <!-- FullCalendar (required dependency) -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales-all.global.min.js'></script>
 
-<!-- fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;800&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-<!-- wakesys calendar related scripts -->
-<script src="helpfunctions.js"></script>
-<script src="wakesyscalendar.js"></script>
-<link href="wakesyscalendar.css" rel="stylesheet">
-
+    <!-- WakeSys Calendar -->
+    <script src="dist/wakesyscalendar.js"></script>
+    <link href="wakesyscalendar.css" rel="stylesheet">
+</head>
+<body>
 
 <div class='innerwrapper'>
-	<div id='wakesys_calendar'></div>
+    <div id='wakesys_calendar'></div>
 </div>
 
+<script>
+/**
+ * WakeSys Calendar v2.0 - Modern API
+ * 
+ * Use the WakeSysCalendar class for full control and TypeScript support.
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    const calendar = new WakeSysCalendar('#wakesys_calendar', {
+        // Required: Your WakeSys park subdomain
+        parkSubdomain: 'test-wasserski-wedau',
+
+        // Locale settings
+        firstDayOfWeek: 1,          // 1 = Monday, 0 = Sunday
+        locale: 'de',               // Calendar locale (de, fr, it, es, en-gb)
+
+        // Time settings
+        minOpeningHours: '08:00:00', // Earliest time shown
+        maxOpeningHours: '20:00:00', // Latest time shown
+        timeAmPm: false,             // false = 24h, true = AM/PM
+
+        // Display settings
+        textColor: '#000',
+        calendarHeight: '800px',     // 'auto' or specific height
+        hideEventsIfNotBookable: false,
+        headerToolbarLeft: 'dayGridMonth,timeGridWeek,timeGridDay',
+
+        // Translations
+        translations: {
+            public_opening_hours: 'Öffentlicher Betrieb',
+            slot: 'Slot',
+            bookable: 'buchbar',
+            booked_out: 'ausgebucht',
+            not_available: 'nicht buchbar',
+            currency: '€',
+            full_booked: 'ausgebucht',
+            slotPrice: 'ab €20',
+            loading: 'Lädt',
+        },
+
+        // Event colors (leave empty for auto-generation)
+        colors: {
+            // 'Slot': '#88e645',  // Regular Opening Hours
+            // '1': '#ff6b6b',     // Event Type 1
+        },
+
+        // Events to show (leave empty for auto-generation)
+        eventsToShow: {
+            // 'Slot': true,       // Show Regular Opening Hours
+            // '1': true,          // Show Event Type 1
+        },
+
+        // Debug mode (optional)
+        debug: false,
+    });
+
+    calendar.render();
+});
+</script>
+
+<!--
+=============================================================================
+ALTERNATIVE: Legacy API (Backward Compatible with v1.x)
+=============================================================================
+
+If you're migrating from v1.x, you can still use global variables.
+Just define the variables before the script and the calendar will auto-initialize.
 
 <script>
-/* GENERAL CONFIGURATION START */
-var park_subdomain = 'test-wasserski-wedau'; //put in your park subdomain
-var park_first_day_of_week = 1; //first day of the week: 1 for monday, 0 for sunday
-var locale = 'de'; //de,fr,it,es,en-gb (this is for the native translations of the calendar)
-var park_min_opening_hours = '08:00:00'; // earliest time you open/have sessions/events
-var park_max_opening_hours = '20:00:00'; // latest time your sessions/events end
-var park_time_am_or_pm = false; //if am/pm, change to hour12: true
-var textColor = '#000'; //text color in the events
-var calendarHeight = '800px' //auto: the calendar height will adopt the height of the content inside the calendar. Alternatively, you can do something like 800px, if the calendar should always be 800px, and the contents inside will then become scrowlable
-var hideEventsIfNotBookable = false; //hide events when they are not bookable in wakesys. alternatively do false, if you want to show them greyed out and with not available.
-var headerToolbarLeft = 'dayGridMonth,timeGridWeek,timeGridDay'; //what buttons to show in the header toolbar
-/* CONFIGURATION END */
+// GENERAL CONFIGURATION
+var park_subdomain = 'test-wasserski-wedau';
+var park_first_day_of_week = 1;
+var locale = 'de';
+var park_min_opening_hours = '08:00:00';
+var park_max_opening_hours = '20:00:00';
+var park_time_am_or_pm = false;
+var textColor = '#000';
+var calendarHeight = '800px';
+var hideEventsIfNotBookable = false;
+var headerToolbarLeft = 'dayGridMonth,timeGridWeek,timeGridDay';
 
-/* TRANSLATIONS CONFIGURATION START*/
+// TRANSLATIONS
 var translations = {
-    'public_opening_hours': 'Öffentlicher Betrieb', //public riding hours
-    'slot': 'Slot', //slot
-    'bookable': 'buchbar', //event can be booked: bookable
-    'booked_out': 'ausgebucht', //event is booked out: booked out
-    'not_available': 'nicht buchbar', //event cannot be booked: not available
-    'currency': '€', //currency: $,€,
-    'full_booked': 'ausgebucht', //session is fully booked
-    'slotPrice' : 'ab €20', //for example:  from €20
-    'loading' : 'Lädt', //loading...
-};
-/* TRANSLATIONS CONFIGURATION END*/
-
-/* EVENTS CONFIGURATION START*/
-var colors = {
+    'public_opening_hours': 'Öffentlicher Betrieb',
+    'slot': 'Slot',
+    'bookable': 'buchbar',
+    'booked_out': 'ausgebucht',
+    'not_available': 'nicht buchbar',
+    'currency': '€',
+    'full_booked': 'ausgebucht',
+    'slotPrice': 'ab €20',
+    'loading': 'Lädt',
 };
 
-var eventsToShow = {
-};
-/* EVENTS CONFIGURATION END*/
-
-/* COLOR MAPPING GENERATOR START*/
-
-var forceEventsConfigurationGenerator = false; //change this to forceEventsConfigurationGenerator = true; in order to generate colors for each event and a list of events that should be show/hidden. Also switch it to true, if you need to add a new type of event that you recently added in wakesys. Make sure to not overwrite your previous color codes and show settings though!!
-
-/* COLOR MAPPING GENERATOR END */
+// EVENTS CONFIGURATION (leave empty for auto-generation)
+var colors = {};
+var eventsToShow = {};
 </script>
+<script src="dist/wakesyscalendar.js"></script>
+-->
+
+</body>
+</html>

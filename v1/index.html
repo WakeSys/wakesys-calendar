@@ -1,0 +1,70 @@
+
+<!-- fullcalendar related scripts -->
+<script
+	src="https://code.jquery.com/jquery-3.7.1.min.js"
+	integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+	crossorigin="anonymous">     
+</script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales-all.global.min.js'></script>
+
+
+<!-- fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+<!-- wakesys calendar related scripts -->
+<script src="helpfunctions.js"></script>
+<script src="wakesyscalendar.js"></script>
+<link href="wakesyscalendar.css" rel="stylesheet">
+
+
+<div class='innerwrapper'>
+	<div id='wakesys_calendar'></div>
+</div>
+
+
+<script>
+/* GENERAL CONFIGURATION START */
+var park_subdomain = 'test-wasserski-wedau'; //put in your park subdomain
+var park_first_day_of_week = 1; //first day of the week: 1 for monday, 0 for sunday
+var locale = 'de'; //de,fr,it,es,en-gb (this is for the native translations of the calendar)
+var park_min_opening_hours = '08:00:00'; // earliest time you open/have sessions/events
+var park_max_opening_hours = '20:00:00'; // latest time your sessions/events end
+var park_time_am_or_pm = false; //if am/pm, change to hour12: true
+var textColor = '#000'; //text color in the events
+var calendarHeight = '800px' //auto: the calendar height will adopt the height of the content inside the calendar. Alternatively, you can do something like 800px, if the calendar should always be 800px, and the contents inside will then become scrowlable
+var hideEventsIfNotBookable = false; //hide events when they are not bookable in wakesys. alternatively do false, if you want to show them greyed out and with not available.
+var headerToolbarLeft = 'dayGridMonth,timeGridWeek,timeGridDay'; //what buttons to show in the header toolbar
+/* CONFIGURATION END */
+
+/* TRANSLATIONS CONFIGURATION START*/
+var translations = {
+    'public_opening_hours': 'Öffentlicher Betrieb', //public riding hours
+    'slot': 'Slot', //slot
+    'bookable': 'buchbar', //event can be booked: bookable
+    'booked_out': 'ausgebucht', //event is booked out: booked out
+    'not_available': 'nicht buchbar', //event cannot be booked: not available
+    'currency': '€', //currency: $,€,
+    'full_booked': 'ausgebucht', //session is fully booked
+    'slotPrice' : 'ab €20', //for example:  from €20
+    'loading' : 'Lädt', //loading...
+};
+/* TRANSLATIONS CONFIGURATION END*/
+
+/* EVENTS CONFIGURATION START*/
+var colors = {
+};
+
+var eventsToShow = {
+};
+/* EVENTS CONFIGURATION END*/
+
+/* COLOR MAPPING GENERATOR START*/
+
+var forceEventsConfigurationGenerator = false; //change this to forceEventsConfigurationGenerator = true; in order to generate colors for each event and a list of events that should be show/hidden. Also switch it to true, if you need to add a new type of event that you recently added in wakesys. Make sure to not overwrite your previous color codes and show settings though!!
+
+/* COLOR MAPPING GENERATOR END */
+</script>
