@@ -8,7 +8,7 @@ A customizable calendar integration for WakeSys that displays bookable sessions,
 
 | Version | Release | Features | Dependencies |
 |---------|---------|----------|--------------|
-| v2.0.0 | Dec 2024 | TypeScript, class-based API, modern UI | FullCalendar only |
+| v2.0.1 | Dec 2024 | TypeScript, class-based API, modern UI | FullCalendar only |
 | v1.0.2 | Legacy | Global variables API | jQuery, moment.js, FullCalendar |
 
 > **Note**: v1.x files are preserved in the `/v1` folder for backward compatibility.

@@ -1,6 +1,6 @@
 {
   "name": "wakesys-calendar",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A customizable calendar integration for WakeSys that displays bookable sessions, events, and opening hours using FullCalendar.js",
   "type": "module",
   "main": "dist/wakesyscalendar.js",
