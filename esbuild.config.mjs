@@ -1,9 +1,24 @@
 import * as esbuild from 'esbuild';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 
 // Read version from package.json
 const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 const version = pkg.version;
+
+// Update CSS version header
+function updateCssVersion() {
+  const cssPath = './wakesyscalendar.css';
+  let css = readFileSync(cssPath, 'utf-8');
+  
+  // Replace version in header comment
+  css = css.replace(
+    /WakeSys Calendar Styles v[\d.]+/,
+    `WakeSys Calendar Styles v${version}`
+  );
+  
+  writeFileSync(cssPath, css);
+  console.log(`CSS version updated to v${version}`);
+}
 
 const isWatch = process.argv.includes('--watch');
 
@@ -35,6 +50,9 @@ if (typeof window !== 'undefined') {
 }`,
   },
 };
+
+// Update CSS version
+updateCssVersion();
 
 if (isWatch) {
   const ctx = await esbuild.context(buildOptions);
