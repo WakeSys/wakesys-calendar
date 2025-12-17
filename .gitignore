@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# IDE
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Note: dist/ is NOT ignored - it's needed for CDN distribution

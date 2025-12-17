@@ -8,27 +8,48 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@100;400;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- FullCalendar (required dependency) -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales-all.global.min.js'></script>
 
-    <!-- WakeSys Calendar -->
+    <!-- WakeSys Calendar v2.0.0 -->
     <script src="dist/wakesyscalendar.js"></script>
     <link href="wakesyscalendar.css" rel="stylesheet">
+    
+    <style>
+        /* Page layout styles */
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f5f5f5;
+        }
+        .calendar-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        @media (max-width: 768px) {
+            body { padding: 0; }
+            .calendar-wrapper { padding: 15px; border-radius: 0; }
+        }
+    </style>
 </head>
 <body>
 
-<div class='innerwrapper'>
+<div class="calendar-wrapper">
     <div id='wakesys_calendar'></div>
 </div>
 
 <script>
 /**
- * WakeSys Calendar v2.0 - Modern API
- * 
- * Use the WakeSysCalendar class for full control and TypeScript support.
+ * WakeSys Calendar v2.0 - Configuration Example
  */
 document.addEventListener('DOMContentLoaded', function() {
     const calendar = new WakeSysCalendar('#wakesys_calendar', {
@@ -37,18 +58,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Locale settings
         firstDayOfWeek: 1,          // 1 = Monday, 0 = Sunday
-        locale: 'de',               // Calendar locale (de, fr, it, es, en-gb)
+        locale: 'de',               // Calendar locale
 
         // Time settings
-        minOpeningHours: '08:00:00', // Earliest time shown
-        maxOpeningHours: '20:00:00', // Latest time shown
-        timeAmPm: false,             // false = 24h, true = AM/PM
+        minOpeningHours: '08:00:00',
+        maxOpeningHours: '22:00:00',
+        timeAmPm: false,
 
         // Display settings
         textColor: '#000',
-        calendarHeight: '800px',     // 'auto' or specific height
+        calendarHeight: 'auto',
         hideEventsIfNotBookable: false,
-        headerToolbarLeft: 'dayGridMonth,timeGridWeek,timeGridDay',
+        headerToolbarLeft: 'timeGridWeek,timeGridDay',
 
         // Translations
         translations: {
@@ -63,66 +84,23 @@ document.addEventListener('DOMContentLoaded', function() {
             loading: 'Lädt',
         },
 
-        // Event colors (leave empty for auto-generation)
+        // Event colors (leave empty {} for auto-generation)
         colors: {
-            // 'Slot': '#88e645',  // Regular Opening Hours
-            // '1': '#ff6b6b',     // Event Type 1
+            // 'Slot': '#88e645',
+            // 'EVENT_ID': '#COLOR',
         },
 
-        // Events to show (leave empty for auto-generation)
+        // Event visibility
         eventsToShow: {
-            // 'Slot': true,       // Show Regular Opening Hours
-            // '1': true,          // Show Event Type 1
+            // 'Slot': false,
         },
 
-        // Debug mode (optional)
         debug: false,
     });
 
     calendar.render();
 });
 </script>
-
-<!--
-=============================================================================
-ALTERNATIVE: Legacy API (Backward Compatible with v1.x)
-=============================================================================
-
-If you're migrating from v1.x, you can still use global variables.
-Just define the variables before the script and the calendar will auto-initialize.
-
-<script>
-// GENERAL CONFIGURATION
-var park_subdomain = 'test-wasserski-wedau';
-var park_first_day_of_week = 1;
-var locale = 'de';
-var park_min_opening_hours = '08:00:00';
-var park_max_opening_hours = '20:00:00';
-var park_time_am_or_pm = false;
-var textColor = '#000';
-var calendarHeight = '800px';
-var hideEventsIfNotBookable = false;
-var headerToolbarLeft = 'dayGridMonth,timeGridWeek,timeGridDay';
-
-// TRANSLATIONS
-var translations = {
-    'public_opening_hours': 'Öffentlicher Betrieb',
-    'slot': 'Slot',
-    'bookable': 'buchbar',
-    'booked_out': 'ausgebucht',
-    'not_available': 'nicht buchbar',
-    'currency': '€',
-    'full_booked': 'ausgebucht',
-    'slotPrice': 'ab €20',
-    'loading': 'Lädt',
-};
-
-// EVENTS CONFIGURATION (leave empty for auto-generation)
-var colors = {};
-var eventsToShow = {};
-</script>
-<script src="dist/wakesyscalendar.js"></script>
--->
 
 </body>
 </html>

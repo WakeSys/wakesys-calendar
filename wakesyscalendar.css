@@ -1,48 +1,366 @@
-.fc-timegrid-slot {
-    height: 60px !important;
-}
-.innerwrapper {
-    padding-left: 3.7vw;
-    padding-right: 3.7vw;
-    width: 85%;
-    margin: 0 auto;
-}
+/**
+ * WakeSys Calendar Styles v2.0.0
+ * Copyright (c) 2025 wakesys s.à.r.l.
+ * Licensed under GPL-3.0
+ */
+
+/* ============================================================================
+   Base Styles
+   ============================================================================ */
+
 #wakesys_calendar {
-    width: 100%;
-    border: 1px solid #000;
-    padding: 40px;
-    font-family: "Sarabun"; /* put in your font here */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
+
+/* ============================================================================
+   Header Toolbar
+   ============================================================================ */
+
+.fc .fc-toolbar {
+    margin-bottom: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.fc .fc-toolbar-chunk {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* View switcher (Woche/Tag) - pill shape */
+.fc .fc-toolbar-chunk:nth-child(2) .fc-button-group {
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid #222;
+    display: flex;
+}
+
+.fc .fc-toolbar-chunk:nth-child(2) .fc-button-group .fc-button {
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 10px 24px;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Default button state */
+.fc .fc-button {
+    background: #fff;
+    border: 1px solid #222;
+    color: #222;
+    font-weight: 500;
+    padding: 8px 22px;
+    text-transform: none;
+    font-size: 15px;
+    transition: all 0.15s ease;
+}
+
+.fc .fc-button:hover {
+    background: #f0f0f0;
+}
+
+/* Active view button */
+.fc .fc-button-primary:not(:disabled).fc-button-active,
+.fc .fc-button-primary:not(:disabled):active {
+    background: #222 !important;
+    border-color: #222 !important;
+    color: #fff !important;
+}
+
+.fc .fc-button-primary:focus {
+    box-shadow: none;
+}
+
+/* Today button */
+.fc .fc-today-button {
+    background: #222 !important;
+    border: 1px solid #222 !important;
+    color: #fff !important;
+    border-radius: 50px !important;
+    padding: 10px 28px !important;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.fc .fc-today-button:hover {
+    background: #333 !important;
+}
+
+.fc .fc-today-button:disabled {
+    background: #222 !important;
+    border-color: #222 !important;
+    color: #fff !important;
+    opacity: 1;
+}
+
+/* Navigation buttons group (prev/next) - no border around group */
+.fc .fc-toolbar-chunk:last-child .fc-button-group {
+    border: none !important;
+    background: none !important;
+    overflow: visible !important;
+    gap: 6px;
+}
+
+/* Navigation buttons - circular with border */
+.fc .fc-prev-button,
+.fc .fc-next-button {
+    background: #fff !important;
+    border: 1.5px solid #222 !important;
+    border-radius: 50% !important;
+    width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    min-width: 42px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.fc .fc-prev-button:hover,
+.fc .fc-next-button:hover {
+    background: #f5f5f5 !important;
+}
+
+.fc .fc-prev-button .fc-icon,
+.fc .fc-next-button .fc-icon {
+    font-size: 1.3em;
+    color: #222;
+}
+
+/* ============================================================================
+   Calendar Grid
+   ============================================================================ */
+
+.fc .fc-timegrid-slot {
+    height: 55px !important;
+}
+
+.fc .fc-col-header-cell {
+    padding: 12px 0;
+    background: transparent;
+}
+
+.fc .fc-col-header-cell-cushion {
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.fc .fc-timegrid-slot-label {
+    font-size: 16px;
+    color: #222;
+    font-weight: 600;
+}
+
+.fc .fc-timegrid-slot-label-cushion {
+    padding: 0 15px 0 0;
+}
+
+/* All-day section - hide when empty, show when has events */
+.fc .fc-daygrid-body {
+    min-height: 0;
+}
+
+/* Hide the all-day row by default */
+.fc .fc-scrollgrid-section-body:first-child {
+    display: none;
+}
+
+/* Show it when there are all-day events (using :has selector) */
+.fc .fc-scrollgrid-section-body:first-child:has(.fc-daygrid-event) {
+    display: table-row;
+}
+
+.fc .fc-timegrid-axis-cushion {
+    font-size: 12px;
+    color: #666;
+}
+
+.fc .fc-timegrid-divider {
+    display: none;
+}
+
+/* Grid borders - thin and subtle */
+.fc-theme-standard td,
+.fc-theme-standard th {
+    border-color: #e5e5e5;
+}
+
+.fc-theme-standard .fc-scrollgrid {
+    border: none;
+}
+
+/* Time axis styling */
+.fc .fc-timegrid-axis {
+    border-color: #e5e5e5;
+}
+
+/* Column separators */
+.fc .fc-timegrid-col {
+    border-color: #e5e5e5;
+}
+
+/* Time slot horizontal lines */
+.fc .fc-timegrid-slot {
+    border-color: #eee !important;
+}
+
+/* Major time slot lines (on the hour) */
+.fc .fc-timegrid-slot-minor {
+    border-top-style: none;
+}
+
+/* Today column highlight - none */
+.fc .fc-day-today {
+    background: transparent !important;
+}
+
+/* Header bottom border */
+.fc .fc-col-header {
+    border-bottom: 1px solid #ddd;
+}
+
+/* ============================================================================
+   Event Styling
+   ============================================================================ */
+
+/* Event container - add horizontal gap */
+.fc-timegrid-event-harness {
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+}
+
+/* Add vertical gap using inset adjustment */
+.fc-timegrid-event-harness > .fc-timegrid-event {
+    top: 3px !important;
+    bottom: 3px !important;
+}
+
+.fc-timegrid-event-harness-inset > .fc-timegrid-event {
+    top: 3px !important;
+    bottom: 3px !important;
+}
+
+.fc-timegrid-event,
+.fc-timegrid-more-link {
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    overflow: hidden;
+}
+
+.fc-v-event {
+    border-width: 1px !important;
+    border-style: solid !important;
+}
+
+.fc-v-event .fc-event-main {
+    padding: 10px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    height: 100%;
+    justify-content: center;
+}
+
 .fc-event-main {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-}
-.fc-timegrid-event, .fc-timegrid-more-link {
-    border-radius: 0.25em;
-}
-.fc-v-event {
-    border: 0;
+    overflow: hidden;
 }
 
+/* Event time */
+.fc-event-time {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 3px;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+/* Event title */
 .fc-event-title {
-    font-weight: bold;
-    font-size: 22px;
-}
-.fc-event-cable {
-    font-size: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.3;
+    margin-bottom: 3px;
 }
 
-.fc-event-price, .fc-event-capacity, .fc-event-bookable {
-    display: inline-block;
-    vertical-align: top; /* To align them at the top */
-    margin-right: 10px; /* Optional: adds some space between the elements */
-    font-size: var(--fc-small-font-size);
+/* Cable/Location name - hide it for cleaner look */
+.fc-event-cable {
+    display: none;
 }
+
+/* Combined capacity and price */
+.fc-event-capacity-price {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+/* Legacy capacity and price (hidden by default) */
+.fc-event-capacity,
+.fc-event-price {
+    display: none;
+}
+
+/* Bookable badge - hidden by default for cleaner look */
 .fc-event-bookable {
-    background-color: #C2DDC8;
-    width: 80%;
-    margin: auto;
-    border-radius: 0.25em;
-    margin-top: 5px;
+    display: none;
 }
+
+/* Event frame */
+.fc-v-event .fc-event-main-frame {
+    height: 100%;
+}
+
+/* ============================================================================
+   Loading Overlay
+   ============================================================================ */
+
+#loadingOverlay {
+    border-radius: 12px;
+}
+
+/* ============================================================================
+   Responsive
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .fc .fc-toolbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .fc .fc-toolbar-title {
+        font-size: 1.2em;
+    }
+}
+
+/* ============================================================================
+   Optional: Calendar Wrapper Styles
+   Add these to your page if you want a card-style container
+   ============================================================================ */
+
+/*
+.calendar-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+*/

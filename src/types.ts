@@ -177,6 +177,7 @@ export interface CalendarEvent {
   start: Date;
   end: Date;
   backgroundColor: string;
+  borderColor?: string;
   textColor: string;
   url?: string;
   allDay: boolean;
@@ -250,6 +251,7 @@ export interface FullCalendarOptions {
   slotMaxTime: string;
   slotLabelInterval: { hours: number };
   slotLabelFormat: { hour: string; hour12: boolean };
+  slotLabelContent?: (arg: { date: Date }) => string;
   events: (
     fetchInfo: FetchInfo,
     successCallback: (events: CalendarEvent[]) => void,
@@ -318,3 +320,4 @@ declare global {
     initWakeSysCalendarLegacy: typeof import('./index').initWakeSysCalendarLegacy;
   }
 }
+

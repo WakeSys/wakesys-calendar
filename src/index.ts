@@ -33,6 +33,7 @@ export {
   addDays,
   isSameDay,
   generateColor,
+  darkenColor,
   createElement,
   toggleLoadingOverlay,
   closeModal,
@@ -145,3 +146,4 @@ if (typeof window !== 'undefined' && typeof document !== 'undefined') {
     autoInitLegacy();
   }
 }
+

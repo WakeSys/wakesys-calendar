@@ -33,3 +33,4 @@ Consider migrating to v2.x for:
 - Modern class-based API
 
 See the main [README.md](../README.md) for v2.x documentation.
+

@@ -1,4 +1,9 @@
 import * as esbuild from 'esbuild';
+import { readFileSync } from 'fs';
+
+// Read version from package.json
+const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
+const version = pkg.version;
 
 const isWatch = process.argv.includes('--watch');
 
@@ -14,9 +19,11 @@ const buildOptions = {
   minify: !isWatch,
   banner: {
     js: `/**
- * WakeSys Calendar v2.0.0
+ * WakeSys Calendar v${version}
  * Copyright (c) 2025 wakesys s.à.r.l.
  * Licensed under GPL-3.0
+ * 
+ * @version ${version}
  */`,
   },
   footer: {
@@ -37,3 +44,4 @@ if (isWatch) {
   await esbuild.build(buildOptions);
   console.log('Build complete!');
 }
+

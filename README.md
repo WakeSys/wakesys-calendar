@@ -2,14 +2,14 @@
 
 A customizable calendar integration for WakeSys that displays bookable sessions, events, and opening hours using FullCalendar.js.
 
-**v2.0** - Now written in TypeScript with zero jQuery/moment.js dependencies!
+**v2.0.0** - Now written in TypeScript with zero jQuery/moment.js dependencies and modern styling!
 
 ## Version History
 
-| Version | Features | Dependencies |
-|---------|----------|--------------|
-| v2.x | TypeScript, class-based API, smaller bundle | FullCalendar only |
-| v1.x | Legacy global variables API | jQuery, moment.js, FullCalendar |
+| Version | Release | Features | Dependencies |
+|---------|---------|----------|--------------|
+| v2.0.0 | Dec 2024 | TypeScript, class-based API, modern UI | FullCalendar only |
+| v1.0.2 | Legacy | Global variables API | jQuery, moment.js, FullCalendar |
 
 > **Note**: v1.x files are preserved in the `/v1` folder for backward compatibility.
 
@@ -25,6 +25,7 @@ A customizable calendar integration for WakeSys that displays bookable sessions,
 - Configurable booking cut-off times
 - **TypeScript support** with full type definitions
 - **No jQuery or moment.js dependencies** (smaller bundle)
+- **Modern UI** with pill-shaped buttons, circular nav arrows, and clean grid styling
 
 ## Installation
 
@@ -141,6 +142,41 @@ translations: {
     slotPrice: 'from €20',                   // Default slot price text
     loading: 'Loading',                      // Loading status text
 }
+```
+
+## Styling
+
+The calendar comes with modern styling out of the box via `wakesyscalendar.css`:
+
+- **Header toolbar**: Pill-shaped view switcher, circular navigation buttons
+- **Grid**: Clean borders, subtle time slot lines
+- **Events**: Rounded cards with proper spacing
+
+### Custom Event Colors
+
+Event colors are **not** included in the default CSS - configure them per-park:
+
+```css
+/* Add to your page or custom stylesheet */
+.FID_event_type_1 { background-color: #b5d7f0 !important; border-color: #8fb8d9 !important; }
+.FID_event_type_2 { background-color: #f5a623 !important; border-color: #c4851c !important; }
+```
+
+Or use the JavaScript `colors` configuration (recommended):
+
+```javascript
+colors: {
+    '1': '#b5d7f0',  // Event Type ID 1
+    '2': '#f5a623',  // Event Type ID 2
+}
+```
+
+### Recommended Font
+
+For best results, include the Inter font:
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 ```
 
 ## Event Colors and Visibility

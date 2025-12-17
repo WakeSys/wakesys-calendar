@@ -81,6 +81,27 @@ export function isBeforeOrEqual(date1: Date, date2: Date): boolean {
 // ============================================================================
 
 /**
+ * Darken a hex color by a percentage
+ */
+export function darkenColor(hex: string, percent: number): string {
+  // Remove # if present
+  hex = hex.replace(/^#/, '');
+  
+  // Parse RGB values
+  let r = parseInt(hex.substring(0, 2), 16);
+  let g = parseInt(hex.substring(2, 4), 16);
+  let b = parseInt(hex.substring(4, 6), 16);
+  
+  // Darken
+  r = Math.max(0, Math.floor(r * (1 - percent / 100)));
+  g = Math.max(0, Math.floor(g * (1 - percent / 100)));
+  b = Math.max(0, Math.floor(b * (1 - percent / 100)));
+  
+  // Convert back to hex
+  return '#' + [r, g, b].map(c => c.toString(16).padStart(2, '0')).join('');
+}
+
+/**
  * Generate a color based on a string (for automatic event coloring)
  */
 export function generateColor(eventName: string): string {
@@ -326,3 +347,4 @@ export function closeModal(): void {
 if (typeof window !== 'undefined') {
   (window as Window & { closeModal?: typeof closeModal }).closeModal = closeModal;
 }
+

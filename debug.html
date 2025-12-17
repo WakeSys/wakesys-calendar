@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WakeSys Calendar - Debug</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FullCalendar (required dependency) -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.10/locales-all.global.min.js'></script>
+
+    <!-- WakeSys Calendar -->
+    <script src="dist/wakesyscalendar.js"></script>
+    <link href="wakesyscalendar.css" rel="stylesheet">
+    
+    <style>
+        /* ============================================================
+           Page Layout (not part of calendar styles)
+           ============================================================ */
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .calendar-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .calendar-wrapper {
+                padding: 15px;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="calendar-wrapper">
+    <div id='wakesys_calendar'></div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const calendar = new WakeSysCalendar('#wakesys_calendar', {
+        parkSubdomain: 'langenfeld',
+        
+        firstDayOfWeek: 1,
+        locale: 'de',
+        
+        minOpeningHours: '07:00:00',
+        maxOpeningHours: '23:00:00',
+        timeAmPm: false,
+        
+        textColor: '#000',
+        calendarHeight: 'auto',
+        hideEventsIfNotBookable: false,
+        headerToolbarLeft: 'timeGridWeek,timeGridDay',
+        
+        translations: {
+            public_opening_hours: 'Öffentlicher Betrieb',
+            slot: 'Slot',
+            bookable: 'buchbar',
+            booked_out: 'ausgebucht',
+            not_available: 'nicht buchbar',
+            currency: '€',
+            full_booked: 'ausgebucht',
+            slotPrice: 'ab €20',
+            loading: 'Lädt',
+        },
+
+        /* ============================================================
+           Event Type Colors
+           ============================================================
+           Configure colors for each event type ID.
+           Leave empty {} to auto-generate colors.
+           
+           Format: 'EVENT_TYPE_ID': '#HEX_COLOR'
+           
+           To find event type IDs, enable debug mode and check the
+           browser console for "FID_event_type_XXX" in class names.
+           ============================================================ */
+        colors: {
+            'Slot': '#88e645',
+            // Sessions (blues)
+            '3': '#9fcde8',   // Medium Surf Session
+            '4': '#b5d7f0',   // Big Surf Session
+            '1': '#b5d7f0',   // Exklusive Session
+            '8855': '#9fcde8', // Pro Session
+            '10579': '#b5d7f0', // Early Board
+            '10580': '#9fcde8', // Sunset Session
+            '10753': '#b5d7f0', // Wake Session
+            '10766': '#9fcde8', // Girls Wake Session
+            '10822': '#b5d7f0', // Surfboard Test Session
+            '11086': '#9fcde8', // Big Surf Coaching
+            // Courses (oranges)
+            '2': '#f5a623',    // Surf Kurs
+            '5497': '#f5a623', // Junior Surf Week
+            '10515': '#f5a623', // Osterferienkurs
+            '10524': '#f5a623', // Sommerferienkurs
+            '10525': '#f5a623', // Minikurs Sommerferien
+            '10581': '#f5a623', // Bambinikurs
+            '10738': '#f5a623', // Wakeboardkurs 2.0
+            '10833': '#f5a623', // Herbstferienkurs
+            '10864': '#f5a623', // Junior Surf Week Level 2
+        },
+
+        /* ============================================================
+           Event Visibility
+           ============================================================
+           Control which event types to show/hide.
+           Set to false to hide specific event types.
+           ============================================================ */
+        eventsToShow: {
+            'Slot': false,  // Hide slots, only show events
+        },
+
+        debug: true,
+    });
+
+    calendar.render();
+});
+</script>
+
+</body>
+</html>

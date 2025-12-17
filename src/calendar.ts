@@ -29,6 +29,7 @@ import {
   isSameDay,
   isBeforeOrEqual,
   generateColor,
+  darkenColor,
   createElement,
   toggleLoadingOverlay,
   showGeneratedArrayModal,
@@ -161,14 +162,17 @@ export class WakeSysCalendar {
       firstDay: this.config.firstDayOfWeek,
       locale: this.config.locale,
       headerToolbar: {
-        right: 'prev,next today',
-        center: 'title',
-        left: this.config.headerToolbarLeft,
+        left: 'title',
+        center: this.config.headerToolbarLeft,
+        right: 'today prev,next',
       },
       slotMinTime: this.config.minOpeningHours,
       slotMaxTime: this.config.maxOpeningHours,
       slotLabelInterval: { hours: 1 },
-      slotLabelFormat: { hour: 'numeric', hour12: this.config.timeAmPm },
+      slotLabelFormat: { hour: '2-digit', hour12: false },
+      slotLabelContent: (arg: { date: Date }) => {
+        return String(arg.date.getHours()).padStart(2, '0');
+      },
       events: this.fetchCalendarEvents.bind(this),
       loading: (isLoading: boolean) => {
         toggleLoadingOverlay(
@@ -345,13 +349,14 @@ export class WakeSysCalendar {
         start,
         end: adjustedEnd,
         backgroundColor,
+        borderColor: darkenColor(backgroundColor, 25),
         textColor: this.config.textColor,
         allDay,
         extendedProps: {
           cableName: event.Fcol_boat_cable_name,
           description: event.col_description,
           seats: parseInt(event.col_seats, 10) || null,
-          price: `${this.config.translations.currency}${event.col_price}`,
+          price: `${event.col_price} ${this.config.translations.currency}`,
           hoursInAdvance,
           isBookable: event.col_is_bookable === 'yes',
           checkinTime: event.col_checkin_time,
@@ -421,6 +426,7 @@ export class WakeSysCalendar {
         start,
         end,
         backgroundColor,
+        borderColor: darkenColor(backgroundColor, 25),
         textColor: this.config.textColor,
         allDay: false,
         extendedProps: {
@@ -489,6 +495,7 @@ export class WakeSysCalendar {
         start,
         end,
         backgroundColor,
+        borderColor: darkenColor(backgroundColor, 25),
         textColor: this.config.textColor,
         allDay: false,
         extendedProps: {
@@ -544,25 +551,32 @@ export class WakeSysCalendar {
     // Cable element
     const cableEl = createElement('div', 'fc-event-cable', props.cableName);
 
-    // Capacity element
-    const capacityEl = createElement('div', 'fc-event-capacity');
-    if (
-      bookedSeats !== null &&
-      totalSeats !== null &&
-      bookedSeats < totalSeats
-    ) {
-      capacityEl.innerHTML = `${bookedSeats}/${totalSeats}`;
-    } else if (
-      bookedSeats !== null &&
-      totalSeats !== null &&
-      bookedSeats >= totalSeats
-    ) {
-      capacityEl.innerHTML = this.config.translations.full_booked;
+    // Combined capacity and price element (matching screenshot style: "(0/12) 42.00 €")
+    const capacityPriceEl = createElement('div', 'fc-event-capacity-price');
+    
+    let capacityText = '';
+    if (totalSeats !== null && totalSeats > 0) {
+      const booked = bookedSeats ?? 0;
+      if (booked >= totalSeats) {
+        capacityText = this.config.translations.full_booked;
+      } else {
+        capacityText = `(${booked}/${totalSeats})`;
+      }
+    }
+    
+    const priceText = props.price || '';
+    
+    if (capacityText && priceText) {
+      capacityPriceEl.innerHTML = `${capacityText} ${priceText}`;
+    } else if (capacityText) {
+      capacityPriceEl.innerHTML = capacityText;
+    } else if (priceText) {
+      capacityPriceEl.innerHTML = priceText;
     }
 
-    // Price element
+    // Legacy elements (kept for backward compatibility with existing CSS)
+    const capacityEl = createElement('div', 'fc-event-capacity');
     const priceEl = createElement('div', 'fc-event-price');
-    priceEl.innerHTML = props.price || 'No price available';
 
     // Bookable element
     const bookableEl = createElement('div', 'fc-event-bookable');
@@ -592,7 +606,7 @@ export class WakeSysCalendar {
     }
 
     return {
-      domNodes: [timeEl, titleEl, cableEl, capacityEl, priceEl, bookableEl],
+      domNodes: [timeEl, titleEl, cableEl, capacityPriceEl, bookableEl],
     };
   }
 
@@ -675,3 +689,4 @@ export class WakeSysCalendar {
     this.calendar?.refetchEvents();
   }
 }
+
